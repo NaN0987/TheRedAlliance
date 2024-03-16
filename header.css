@@ -1,0 +1,56 @@
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+
+  .topnav {
+    overflow: hidden;
+    padding: 1px;
+    background-image: linear-gradient(to right, #b2b2b2, #c4c4c4);
+  }
+
+  .topnav a {
+    float: left;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px 30px;
+    text-decoration: none;
+    font-size: 24px;
+    transition-duration: 0.2s;
+    position: relative; /* Added */
+    z-index: 1; /* Added */
+  }
+
+  .topnav > img {
+    padding-top: 0px !important; 
+  }
+
+  .hover {
+    display: flex; /* Added */
+    flex-wrap: wrap; /* Added */
+  }
+
+  .hover a {
+    color: #000000;
+    padding: 6px 30px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    position: relative; /* Addeda */
+    z-index: 1; /* Added */
+    line-height: 30px; /* Adjusted to lower the text */
+  }
+
+  .hover a:hover {
+    background-color: #ddd;
+    color: black;
+    padding-top: 22px; /* Increased padding */
+    padding-bottom: 2px; /* Added */
+    margin-top: -10px; /* Added */
+    margin-bottom: -10px; /* Added */
+  }

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="SAT.css">
+  <script src="./Civil War Interactive Website_files/javascript.js.download"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"></head>
+
+
+</head>
+
+<div class="topnav">
+  <a href="index.html"><img src="images/SATlogo.png" height="30px" width="50px" alt="US Flag" title="Home"></a> 
+  <div class="hover"> 
+    <a href="index.html">HOME</a>
+  </div>
+</div>
+
+<link rel="stylesheet" href="header.css">
+
+
+  <body>
+<style>
+  .answer{
+    justify-content: center;
+    display: flex;
+    margin-top:50px;
+    transition: color 0.3s;
+
+  } 
+
+  .answer h1{
+    color: black;
+    width: 390px;
+  } 
+   .col {
+    flex-direction: row;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+    padding: 20px;
+    background-color: #e4e4e4;
+    
+    
+   }
+   .col2 {
+    flex-direction: row;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+    padding: 20px;
+    background-color: #e4e4e4;
+    
+   }
+   .col:hover{
+    background-color: #ffffff;
+   }
+
+   .question{
+    justify-content: center;
+    display: flex;
+    margin-left: 150px;
+    margin-right: 150px;
+
+  } 
+  .question h1{
+    color: black;
+    font-size:40px;
+  } 
+  .answer button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px; /* Adjust the padding as needed */
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline if not needed */
+  text-align: left; /* Adjust text alignment as needed (e.g., left, center, right) */
+  width: 100%;
+  height: 100%;
+  
+}
+
+
+
+
+
+
+</style>
+
+
+
+<div class="timer">
+  <p id="timerDisplay">Time left: <span id="timeLeft">75 </span> seconds</p>
+</div>
+<div id="scoreDisplay">Score: 0</div>
+
+<div class="question">
+  <div class="col2"><h1>“To You” is an 1856 poem by Walt Whitman. In the
+    poem, Whitman suggests that readers, whom he
+    addresses directly, have not fully understood
+    themselves, writing, _______ Which quotation from “To You” most effectively
+    illustrates the claim? 
+    </h1></div>
+</div>
+
+<div class="answer"> 
+  <button id="answer1">
+    <div class="col"><h1>{{question1}}</h1></div>
+  </button>
+  <button id="answer2">
+    <div class="col"><h1>{{question2}}</h1></div>
+  </button>
+  <button id="answer3">
+  <div class="col"><h1>{{question3}}</h1></div>
+  </button>
+  <button id="answer4">
+  <div class="col"><h1>{{question4}}</h1></div>
+  </button>
+</div>
+
+
+
+</body>
+
+<footer>
+    <p>Made by Gabriel Finsilver and Noah Nicholson</p>
+    <p>Class of 2025, Walled Lake Northern</p>
+  </footer>
+
+
+  <script>
+
+    const correctAnswer = '1'; // Change this to the correct answer identifier
+    
+    // Get references to all answer buttons
+    const answerButtons = document.querySelectorAll('[id^="answer"]');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    
+    function updateScoreDisplay() {
+      scoreDisplay.textContent = 'Score: ' + score;
+    }
+    
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timeLeftDisplay = document.getElementById('timeLeft');
+    const submitButton = document.getElementById('submitAnswer');
+    
+    let timeLeft = 75; // Timer starts with 75 seconds
+    let score = 0;     // User's initial score
+    
+    let timerInterval; // Declare the timerInterval variable outside of functions
+    
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timeLeftDisplay.textContent = timeLeft;
+    
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          handleTimeout();
+        }
+      }, 1000);
+    }
+    
+    function handleTimeout() {
+      // Code to execute when time runs out (e.g., deduct points)
+      score--;
+      updateScoreDisplay(); // Update the score display when time runs out
+    }
+    
+    answerButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        clearInterval(timerInterval);
+    
+        // Determine the selected answer based on the button's ID
+        const selectedAnswer = button.id.substr(-1);
+    
+        // Check if the selected answer is correct
+        if (selectedAnswer === correctAnswer) {
+          score++;
+          handleButtonClick(1)
+        } else {
+          score--;
+          handleButtonClick(-1)
+        }
+        updateScoreDisplay();
+    
+      });
+    });
+
+    function handleButtonClick(buttonId) {
+      // You can perform actions based on the button clicked
+      console.log(`Button ${buttonId} was clicked.`);
+      
+      // If you want to send data to the server, you can use AJAX or the Fetch API.
+      // For example, using the Fetch API to send a POST request:
+      fetch('/button_clicked', {
+          method: 'POST',
+          body: JSON.stringify({ buttonId }),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => {
+          if (response.ok) {
+              // Handle success
+          } else {
+              // Handle error
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+}
+    
+    // Start the timer when the page loads
+    startTimer();
+    updateScoreDisplay();
+    
+    </script>
+
+
+<style>
+  /* Reset default styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #c0c0c0;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header { /*Note: Im pretty sure this does nothing since <header> is never used */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #ffffff;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .section h2 {
+    font-size: 24px;
+  }
+  
+  .section p {
+    font-size: 16px;
+  }
+  
+  .interactive-element {
+    background-color: #919191;
+    color: #000000;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .interactive-element:hover {
+    background-color: #919191;
+    color: #ffffff;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+
+
+  .americaImageTop {
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    position: relative;
+    padding: 250px; 
+    overflow: hidden;
+    transition: background-image 1s ease-in-out;
+  }
+  
+  .text-container {
+    position: absolute;
+    top: 10px;
+    left: 500px;
+    left: clamp(50px, 30%, 100px);
+    color: #ffffff;
+    transition: color 1s ease-in-out;
+  }
+  
+  .title {
+    transition: color 1s ease-in-out;
+    font-size: 130px;
+    font-family: Palatino, serif;
+  }
+  
+  .date {
+    transition: color 1s ease-in-out;
+    font-size: clamp(20px, 2vw, 60px);
+    top: 5px;
+    margin-top: 4%;
+  }
+
+  .authorText {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    padding: 20px;
+    font-size: 26px;
+    color: #ffffff;
+  }
+
+  .info {
+    background-color: #d8d8d8;
+    margin: 0 auto; /* Centers the info box horizontally */
+    margin-top: 10px;
+    text-align: center; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    max-width: 1600px; 
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .textInsideInfo {
+    font-size: 28px;
+    font-family: Arial, sans-serif;
+
+    color: rgb(0, 0, 0);
+    margin: 20px;
+    padding: 3px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+  }
+
+  .info h3 {
+    font-size: 70px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+ /* Footer section */
+ footer {
+	background-color: #818181;;
+	color: #fff;
+	padding: 30px;
+	align-items: center;
+  font-size: 24px;
+  }
+  .section{
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);  
+    border-radius: 20px;  
+
+  }
+
+      
+.goodLookinP {
+      background-color: #f4f4f4; /* Dark silver */
+      border: 4px solid #dcdcdc; /* Silver border */
+      color:rgb(0, 0, 0); 
+      padding: 20px; /* Padding for spacing */
+      max-width: 600px; /* Adjust as needed */
+      margin: 0 auto; /* Center the container */
+    }
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+
+  .topnav {
+    overflow: hidden;
+    padding: 1px;
+    background-image: linear-gradient(to right, #b2b2b2, #c4c4c4);
+  }
+
+  .topnav a {
+    float: left;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px 30px;
+    text-decoration: none;
+    font-size: 24px;
+    transition-duration: 0.2s;
+    position: relative; /* Added */
+    z-index: 1; /* Added */
+  }
+
+  .topnav > img {
+    padding-top: 0px !important; 
+  }
+
+  .hover {
+    display: flex; /* Added */
+    flex-wrap: wrap; /* Added */
+  }
+
+  .hover a {
+    color: #000000;
+    padding: 6px 30px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    position: relative; /* Addeda */
+    z-index: 1; /* Added */
+    line-height: 30px; /* Adjusted to lower the text */
+  }
+
+  .hover a:hover {
+    background-color: #ddd;
+    color: black;
+    padding-top: 22px; /* Increased padding */
+    padding-bottom: 2px; /* Added */
+    margin-top: -10px; /* Added */
+    margin-bottom: -10px; /* Added */
+  }
+</style>
