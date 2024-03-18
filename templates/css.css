@@ -1,0 +1,106 @@
+/* Reset default styles */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #c0c0c0;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.topnav {
+  overflow: hidden;
+  padding: 1px;
+  background-image: linear-gradient(to right, #b2b2b2, #c4c4c4);
+}
+.topnav img {
+  height: 50px;  
+  width: 80px;  
+}
+.topnav a {
+  float: left;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 5px 30px;
+  text-decoration: none;
+  font-size: 24px;
+  transition-duration: 0.2s;
+  position: relative; /* Added */
+  z-index: 1; /* Added */
+}
+
+.topnav > img {
+  padding-top: 0px !important; 
+}
+
+.hover a {
+  color: #000000;
+  padding: 6px 30px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  position: relative; /* Addeda */
+  z-index: 1; /* Added */
+  line-height: 30px; /* Adjusted to lower the text */
+}
+
+.hover a:hover {
+  background-color: #ddd;
+  color: black;
+  padding-top: 22px; /* Increased padding */
+  padding-bottom: 2px; /* Added */
+  margin-top: -10px; /* Added */
+  margin-bottom: -10px; /* Added */
+}
+
+
+.dataSubmission {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  margin: 10px auto; /* Center horizontally */
+}
+
+.dataSubmission h1 {
+  margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+.dataSubmission form {
+  text-align: center;
+}
+
+.dataSubmission label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.dataSubmission input[type="text"],
+.dataSubmission input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.dataSubmission input[type="submit"] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dataSubmission input[type="submit"]:hover {
+  background-color: #45a049;
+}

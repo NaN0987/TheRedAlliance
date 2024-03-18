@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
     <title>Edit Team Performance</title>
+    <div class="topnav">
+        <a href="index.html"><img src="images/redSmile.png" height="30px" width="50px" alt="logo" title="Home"></a> 
+        <div class="hover"> 
+            <a href="index.html">HOME</a>
+        </div>
+    </div>
 </head>
 <body>
-    <h1>Edit Team Performance</h1>
-    <form method="POST" action="/edit_performance">
-        <label for="team_number">Team Number:</label>
-        <input type="text" id="team_number" name="team_number" required><br><br>
+    <div class="dataSubmission">
+        <h1>Edit Team Performance</h1>
+        <form method="POST" action="/edit_performance">
+            <label for="team_number">Team Number:</label>
+            <input type="text" id="team_number" name="team_number" required><br><br>
 
-        <label for="match_number">Match Number:</label>
-        <input type="number" id="match_number" name="match_number" required><br><br>
+            <label for="match_number">Match Number:</label>
+            <input type="number" id="match_number" name="match_number" required><br><br>
 
-        <label for="score">Score:</label>
-        <input type="number" id="score" name="score" required><br><br>
+            <label for="score">Score:</label>
+            <input type="number" id="score" name="score" required><br><br>
 
-        <label for="ranking">Ranking:</label>
-        <input type="number" id="ranking" name="ranking" required><br><br>
+            <label for="ranking">Ranking:</label>
+            <input type="number" id="ranking" name="ranking" required><br><br>
 
-        <label for="awards">Awards:</label>
-        <input type="text" id="awards" name="awards"><br><br>
+            <label for="awards">Awards:</label>
+            <input type="text" id="awards" name="awards"><br><br>
 
-        <input type="submit" value="Submit">
+            <input type="submit" value="Submit">
     </form>
+</div>
 </body>
 </html>
