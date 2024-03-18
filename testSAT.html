@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="SAT.css">
+
+<head>
+  <title>Quiz Game</title>
+</head>
+<body>
+
+<div id="timerDisplay">Time Left: <span id="timeLeft">75</span> seconds</div>
+<div id="scoreDisplay">Score: <span id="score">0</span></div>
+
+<button id="answer1">Answer 1</button>
+<button id="answer2">Answer 2</button>
+<button id="answer3">Answer 3</button>
+<button id="answer4">Answer 4</button>
+<button id="submitAnswer">Submit Answer</button>
+
+<script>
+
+const correctAnswer = '1'; // Change this to the correct answer identifier
+
+// Get references to all answer buttons
+const answerButtons = document.querySelectorAll('[id^="answer"]');
+const scoreDisplay = document.getElementById('scoreDisplay');
+
+function updateScoreDisplay() {
+  scoreDisplay.textContent = 'Score: ' + score;
+}
+
+const timerDisplay = document.getElementById('timerDisplay');
+const timeLeftDisplay = document.getElementById('timeLeft');
+const submitButton = document.getElementById('submitAnswer');
+
+let timeLeft = 75; // Timer starts with 75 seconds
+let score = 0;     // User's initial score
+
+let timerInterval; // Declare the timerInterval variable outside of functions
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timeLeftDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      handleTimeout();
+    }
+  }, 1000);
+}
+
+function handleTimeout() {
+  // Code to execute when time runs out (e.g., deduct points)
+  score--;
+  alert('Time is up! Your score: ' + score);
+  updateScoreDisplay(); // Update the score display when time runs out
+}
+
+answerButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    clearInterval(timerInterval);
+
+    // Determine the selected answer based on the button's ID
+    const selectedAnswer = button.id.substr(-1);
+
+    // Check if the selected answer is correct
+    if (selectedAnswer === correctAnswer) {
+      score++;
+      alert('Correct! Your score: ' + score);
+    } else {
+      score--;
+      alert('Incorrect! Your score: ' + score);
+    }
+    updateScoreDisplay();
+
+  });
+});
+
+// Start the timer when the page loads
+startTimer();
+updateScoreDisplay();
+
+</script>
+
+</body>
+</html>
